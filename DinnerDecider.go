@@ -24,19 +24,6 @@ var googleOauthConfig = &oauth2.Config{
 	Endpoint: google.Endpoint,
 }
 
-var (
-	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "",
-		ClientID:     "",
-		ClientSecret: "",
-		Scopes: []string{
-			people.UserinfoEmailScope,
-			people.UserinfoProfileScope,
-		},
-		Endpoint: google.Endpoint,
-	}
-)
-
 func main() {
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/", fs)
