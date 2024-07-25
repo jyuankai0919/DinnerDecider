@@ -1,0 +1,63 @@
+<!-- <html>
+<head>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            // 將 token 發送到你的後端
+            fetch('/auth/google/callback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id_token: response.credential })
+            }).then(response => response.json())
+              .then(data => {
+                  // 在這裡處理返回的數據
+                  console.log(data);
+              });
+        }
+    </script>
+</head>
+<body>
+    <div id="g_id_onload"
+         data-client_id="YOUR_GOOGLE_CLIENT_ID"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard">
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps Saved Locations</title>
+    <script>
+        function googleLogin() {
+            window.location.href = "/login";
+        }
+
+        function fetchMapData() {
+            fetch('/maps')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    var mapList = document.getElementById('mapList');
+                    mapList.innerHTML = '';
+                    data.files.forEach(file => {
+                        var li = document.createElement('li');
+                        li.textContent = file.name;
+                        mapList.appendChild(li);
+                    });
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Google Maps Saved Locations</h1>
+    <button onclick="googleLogin()">Login with Google</button>
+    <button onclick="fetchMapData()">Fetch Saved Maps</button>
+    <ul id="mapList"></ul>
+</body>
+</html>
